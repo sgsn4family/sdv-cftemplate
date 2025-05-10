@@ -34,7 +34,7 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: github-deploy-test001
+          name: cf-templates-1mebti1kt9a9q-ap-southeast-2
           template: 2025-05-10T074917.662Ztz5-aws-cf-s3-bucket-001.yaml
           no-fail-on-empty-changeset: "1"
           parameter-overrides: "BucketName=sdvdeploy-test001-bucket-with-cf"
