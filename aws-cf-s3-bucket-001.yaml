@@ -1,0 +1,53 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Test bucket using Cloud Formation
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: sdv-test-bucket-with-cf
+  AccessLogBucket:
+    Type: String
+    Default: my-demo-test-logging-4bb1ed77242437c9
+  KmsKeyArn:
+    Type: String
+    Default: arn:aws:kms:ap-southeast-2:095232028470:key/59af04df-0e3c-4ee2-8a31-a9b688c610b8
+
+Resources:
+
+  MainBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+
+      ## Setup encryption - AES256
+      #BucketEncryption:
+      #  ServerSideEncryptionConfiguration:
+      #    - ServerSideEncryptionByDefault:
+      #        SSEAlgorithm: AES256
+
+      ## Setup encryption - KMS Key
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: aws:kms
+              KMSMasterKeyID: !Ref KmsKeyArn
+
+      ## Enable versioning
+      # VersioningConfiguration:
+      #   Status: Enabled
+
+      ## Block public access
+      # PublicAccessBlockConfiguration:
+      #   BlockPublicAcls: true
+      #   BlockPublicPolicy: true
+      #   IgnorePublicAcls: true
+      #   RestrictPublicBuckets: true
+
+      ## Setup Log bucket
+      # LoggingConfiguration:
+      #   DestinationBucketName: !Ref AccessLogBucket
+
+Outputs:
+  MainBucketName:
+    Description: Name of the main bucket
+    Value: !Ref MainBucket
