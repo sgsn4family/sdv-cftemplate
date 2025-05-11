@@ -32,7 +32,12 @@ jobs:
   #    - name: store to S3 AWS CloudFormation
   #      run: aws s3 cp ./
       - name: Deploy to AWS CloudFormation
-        uses: aws-actions/aws-cloudformation-github-deploy@v1
+        run: | 
+              aws cloudformation deploy \
+              --template-file test-track.yaml
+              --stake-name githubstake
+              --capabilities CAPABILITY_IAM CAPABILITY_IAM 
+              
         with:
           name: cf-templates-1mebti1kt9a9q-ap-southeast-2
           template: 2025-05-10T074917.662Ztz5-aws-cf-s3-bucket-001.yaml
