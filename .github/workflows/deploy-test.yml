@@ -35,7 +35,7 @@ jobs:
         run: | 
               aws cloudformation deploy \
               --template-file test-track.yaml
-              --stake-name githubstake
+              --stack-name abcd123 \
               --capabilities CAPABILITY_IAM CAPABILITY_IAM 
               
   #      with:
