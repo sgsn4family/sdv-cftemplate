@@ -31,10 +31,10 @@ jobs:
       # Deploy to AWS CloudFormation
   #    - name: store to S3 AWS CloudFormation
   #      run: aws s3 cp ./
-      - name: Deploy to AWS CloudFormation
+      - name: Deploy to AWS CloudFormation stack
         run: | 
               aws cloudformation deploy \
-              --template-file test-track.yaml
+              --template-file test-track.yaml \
               --stack-name abcd123 \
               --capabilities CAPABILITY_IAM CAPABILITY_IAM 
               
